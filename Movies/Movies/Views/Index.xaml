@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Movies.Views.Index"
+             xmlns:m="clr-namespace:Movies.Model"
+             xmlns:vm="clr-namespace:Movies.ViewModel" x:DataType="vm:MoviesViewModel"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="title" TargetType="Label">
+                <Setter Property="TextColor" Value="Violet" />
+            </Style>
+            <Style x:Key="frameTitle" TargetType="Label">
+                <Setter Property="TextColor" Value="#E3FFFC" />
+                <Setter Property="FontSize" Value="13" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView VerticalScrollBarVisibility="Never" Orientation="Both" Padding="0" BackgroundColor="black">
+        <RelativeLayout>
+            <StackLayout>
+                <Label HorizontalOptions="Center" Style="{StaticResource title}" FontSize="25" Text="FILMS" Margin="0,20,0,0"></Label>
+                <FlexLayout BindableLayout.ItemsSource="{Binding Movies}" Wrap="Wrap" Direction="Row">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="m:Movie">
+                            <StackLayout Margin="0,0,0,15">
+                                <Frame HeightRequest="200" Margin="10,10,10,0" CornerRadius="8" Padding="0" BackgroundColor="Violet">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="GetMovieCommand" />
+                                    </Frame.GestureRecognizers>
+                                    <FlexLayout Direction="Row">
+                                        <Grid RowSpacing="0">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image Opacity="1" Grid.Row="0" Grid.Column="0" Source="{Binding image}" Aspect="AspectFill" WidthRequest="100" />
+                                                <StackLayout Orientation="Vertical">
+                                                    <Label Style="{StaticResource frameTitle}" Text="{Binding titre}" Margin="20,10,0,0" FontSize="20"></Label>
+                                                    <Frame Padding="10,0,10,0" HorizontalOptions="Start" CornerRadius="15" Margin="20,10,0,0" BackgroundColor="Gray">
+                                                        <Label Style="{StaticResource frameTitle}" Text="{Binding categorie}" FontSize="12"></Label>
+                                                    </Frame>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Style="{StaticResource frameTitle}" Grid.Row="0" Grid.Column="0" Text="{Binding note}" Margin="30,0,0,0" FontSize="12"></Label>
+                                                        <Image Opacity="1" Source="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" WidthRequest="10" />
+                                                    </StackLayout>
+                                                    <Label Style="{StaticResource frameTitle}" Text="{Binding langage}" Margin="30,0,0,0" FontSize="12"></Label>
+                                                    <Label Style="{StaticResource frameTitle}" Text="{Binding longueur}" Margin="30,0,0,0" FontSize="12"></Label>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </Grid>
+                                    </FlexLayout>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+            </StackLayout>
+        </RelativeLayout>
+    </ScrollView>
+</ContentPage>

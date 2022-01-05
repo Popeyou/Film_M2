@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Movies.Views.Details"
+             xmlns:m="clr-namespace:Movies.Model"
+             xmlns:vm="clr-namespace:Movies.ViewModel" x:DataType="vm:DetailsViewModel">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="title" TargetType="Label">
+                <Setter Property="TextColor" Value="#E3FFFC" />
+            </Style>
+            <Style x:Key="frameTitle" TargetType="Label">
+                <Setter Property="TextColor" Value="#E3FFFC" />
+                <Setter Property="FontSize" Value="13" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView VerticalScrollBarVisibility="Never" Orientation="Both" Padding="0" BackgroundColor="Black">
+        <RelativeLayout>
+            <StackLayout>
+                <FlexLayout BindableLayout.ItemsSource="{Binding Movie}" Wrap="Wrap" Direction="Row">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="m:Movie">
+                            <StackLayout Margin="0,0,0,15">
+                                <Frame HeightRequest="200" Margin="10,10,10,0" CornerRadius="8" Padding="0" BackgroundColor="#000526">
+                                    <FlexLayout Direction="Row">
+                                        <WebView Source="{Binding video}" VerticalOptions='FillAndExpand' Margin="0,0,0,0"></WebView>
+                                    </FlexLayout>
+                                </Frame>
+                                <FlexLayout Direction="Row">
+                                        <Grid RowSpacing="0">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image Opacity="1" Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" Source="{Binding image}" Aspect="AspectFill" WidthRequest="100" />
+                                                <StackLayout Orientation="Vertical">
+                                                    <Label Style="{StaticResource frameTitle}" Text="{Binding titre}" Margin="20,10,0,0" FontSize="20"></Label>
+                                                    <Frame Padding="10,0,10,0" HorizontalOptions="Start" CornerRadius="15" Margin="20,10,0,0" BackgroundColor="Gray">
+                                                        <Label Style="{StaticResource frameTitle}" Text="{Binding categorie}" FontSize="12"></Label>
+                                                    </Frame>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Style="{StaticResource frameTitle}" Grid.Row="0" Grid.Column="0" Text="{Binding note}" Margin="30,0,0,0" FontSize="12"></Label>
+                                                        <Image Opacity="1" Source="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" WidthRequest="10" />
+                                                    </StackLayout>
+                                                    <Label Style="{StaticResource frameTitle}" Text="{Binding langage}" Margin="30,0,0,0" FontSize="12"></Label>
+                                                    <Label Style="{StaticResource frameTitle}" Text="{Binding longueur}" Margin="30,0,0,0" FontSize="12"></Label>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </Grid>
+                                    </FlexLayout>
+                                    <FlexLayout Direction="Column">
+                                        <Grid RowSpacing="0">
+                                            <StackLayout Orientation="Vertical">
+                                                <StackLayout Orientation="Horizontal">
+                                                <StackLayout Orientation="Vertical" Margin="20,20,0,0" HorizontalOptions="Start">
+                                                    <Label Style="{StaticResource frameTitle}" Text="Playing Date : " FontAttributes="Bold" FontSize="12"></Label>
+                                                    <Label Style="{StaticResource frameTitle}" Grid.Row="0" Grid.Column="0" Text="{Binding playing_date}"  FontSize="12"></Label>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Vertical" Margin="20,20,0,0">
+                                                    <Label Style="{StaticResource frameTitle}" Text="Playing Time : " FontAttributes="Bold" FontSize="12"></Label>
+                                                    <Label Style="{StaticResource frameTitle}" Grid.Row="0" Grid.Column="0" Text="{Binding playing_time}"  FontSize="12"></Label>
+                                                </StackLayout>
+                                                
+                                                </StackLayout>
+                                                <StackLayout Orientation="Vertical" Margin="20,20,0,0">
+                                                    <Label Style="{StaticResource frameTitle}" Text="Ticket Price : " FontAttributes="Bold" FontSize="12"></Label>
+                                                    <Label Style="{StaticResource frameTitle}" Grid.Row="0" Grid.Column="0" Text="{Binding ticket_price}"  FontSize="12"></Label>
+                                                </StackLayout>
+                                            <StackLayout Orientation="Vertical" Margin="20,20,0,0">
+                                                <Label Style="{StaticResource frameTitle}" Text="Description " FontAttributes="Bold" FontSize="12"></Label>
+                                                <Label Style="{StaticResource frameTitle}" Grid.Row="0" Grid.Column="0" Text="{Binding description}"  FontSize="12"></Label>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        </Grid>
+                                    </FlexLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+            </StackLayout>
+        </RelativeLayout>
+    </ScrollView>
+</ContentPage>
